@@ -141,9 +141,7 @@
                         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-20"># FIXED
-
-from mpl_toolkits.mplot3d import Axes3D
+                <pre><code class="language-python" id="code-20">from mpl_toolkits.mplot3d import Axes3D
 
 from numpy import amax, array
 
@@ -173,9 +171,7 @@ from sklearn.tree import DecisionTreeClassifier</code></pre>
                         <p>With <code>make_classification</code>, we generate a dataset with known structure that is well suited for illustrating classification concepts. Each data point is therefore represented as a <em>vector</em> in a 3-dimensional feature space, with its label indicating class membership. By controlling parameters such as the number of informative features, class separation and the random state, we can generate a dataset with known structure.<br><br>Although the data live in a 3-dimensional feature space, we visualise them here in a simplified, pseudo-3D manner by plotting the distributions of feature values. This allows us to inspect how the individual features are distributed and how much overlap exists between them, without requiring a full, 3-D scatter plot. This allows us to surmise underlying structure in the data.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-21"># FIXED WITH OUTPUT
-
-RANDOM_STATE = 111
+                <pre><code class="language-python" id="code-21">RANDOM_STATE = 111
 
 X, y = make_classification(
     n_samples=500,
@@ -203,9 +199,7 @@ show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-22"># FIXED WITH OUTPUT
-
-fig, ax = subplots(figsize=(10, 8), subplot_kw=dict(projection=&#x27;3d&#x27;))
+                <pre><code class="language-python" id="code-22">fig, ax = subplots(figsize=(10, 8), subplot_kw=dict(projection=&#x27;3d&#x27;))
 
 ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, s=5, cmap=&#x27;bwr&#x27;);
 show()
@@ -233,9 +227,7 @@ show()</code></pre>
         <p>We can now go ahead and use our classifier dictionary – which contains the classifiers with their default settings – to train and evaluate the models.<br><br>We use the train-test split to evaluate the performance.<br><br>Let&#x27;s first re-define our classifier dictionary.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-23"># FIXED WITH OUTPUT
-
-RANDOM_STATE = 111
+                <pre><code class="language-python" id="code-23">RANDOM_STATE = 111
 
 classifiers = {
     &#x27;Random Forest&#x27;: RandomForestClassifier(random_state=RANDOM_STATE),
@@ -253,9 +245,7 @@ classifiers = {
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-24"># FIXED WITH OUTPUT
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.8, random_state=RANDOM_STATE, shuffle=True)
+                <pre><code class="language-python" id="code-24">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.8, random_state=RANDOM_STATE, shuffle=True)
 
 for name, clf in classifiers.items():
     clf.fit(X_train, y_train)
@@ -263,7 +253,7 @@ for name, clf in classifiers.items():
     print(&#x27;{:&lt;30} Score: {:.2f}&#x27;.format(name, score))</code></pre>
             </div>
             <div class="output-container"><pre class="output-stream">Random Forest                  Score: 0.81
-AdaBoost (Random Forest)       Score: 0.81
+AdaBoost (Random Forest)       Score: 0.83
 </pre><pre class="output-stream">Extra Trees                    Score: 0.80
 AdaBoost (Extra Tree)          Score: 0.80
 Decision Tree                  Score: 0.79
@@ -295,9 +285,7 @@ SVC (Linear)                   Score: 0.78
                         <p>Depending on the nature of the data, it might be beneficial to normalise the data before fitting a classifier. This is widely done in machine learning but needs thought in each case.<br><br>Normalisation can be done in various ways. One common way to normalise data is to require that they have mean 0 and variance 1. This is used for example, when calculating the Pearson correlation coefficient. Another popular way in machine learning is to normalise data to Euclidean norm 1. For a data point in an n-dimensional feature space (n is the number of features), the Euclidean norm of a single point (one sample or row) is normalised such that the distance of the point from the origin is 1.<br><br>Let us first see an example: some data points are spread between 1 and 4.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-25"># FIXED WITH OUTPUT
-
-some_data = array([[1, 4], [3, 1], [4, 4], [2, 3]])
+                <pre><code class="language-python" id="code-25">some_data = array([[1, 4], [3, 1], [4, 4], [2, 3]])
 
 norm_skl         = Normalizer()
 some_data_normed = norm_skl.fit_transform(some_data)
@@ -331,9 +319,7 @@ show()</code></pre>
         <p>Effectively, all normalised data are positioned on a circle around the origin with radius 1. Depending on correlations existing between the features this leads to different distortions of the original data.<br><br>Let us now apply this normalisation to our artificial dataset.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-26"># FIXED WITH OUTPUT
-
-norm = Normalizer()
+                <pre><code class="language-python" id="code-26">norm = Normalizer()
 
 X_normed = norm.fit_transform(X)
 
@@ -356,9 +342,7 @@ show()</code></pre>
         <p>The normalisation projects the data on the unit sphere. And now we can do the training on the normalised data:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-27"># FIXED WITH OUTPUT
-
-X_train, X_test, y_train, y_test = train_test_split(X_normed, y, test_size=.8, random_state=RANDOM_STATE, shuffle=True)
+                <pre><code class="language-python" id="code-27">X_train, X_test, y_train, y_test = train_test_split(X_normed, y, test_size=.8, random_state=RANDOM_STATE, shuffle=True)
 
 for name, clf in classifiers.items():
     clf.fit(X_train, y_train)
@@ -366,9 +350,9 @@ for name, clf in classifiers.items():
     print(&#x27;{:&lt;30} Score: {:.2f}&#x27;.format(name, score))</code></pre>
             </div>
             <div class="output-container"><pre class="output-stream">Random Forest                  Score: 0.77
-AdaBoost (Random Forest)       Score: 0.78
+AdaBoost (Random Forest)       Score: 0.77
 </pre><pre class="output-stream">Extra Trees                    Score: 0.77
-AdaBoost (Extra Tree)          Score: 0.78
+AdaBoost (Extra Tree)          Score: 0.77
 Decision Tree                  Score: 0.75
 SVC (RBF)                      Score: 0.79
 SVC (Linear)                   Score: 0.80
@@ -397,9 +381,7 @@ SVC (Linear)                   Score: 0.80
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-28"># FIXED WITH OUTPUT
-
-clf = SVC(kernel=&#x27;rbf&#x27;, C=1, gamma=100, tol=0.0001)
+                <pre><code class="language-python" id="code-28">clf = SVC(kernel=&#x27;rbf&#x27;, C=1, gamma=100, tol=0.0001)
 
 clf.fit(X_train, y_train)
 
@@ -413,9 +395,7 @@ print(&#x27;{:&lt;30} Score: {:.2f}&#x27;.format(&#x27;SVC (RBF)&#x27;, score))<
         <p>Progressive adjustment of some of the parameters may lead to an improved model. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html">Check the documentation</a> for the meaning and the default values of regularisation parameters <code>C</code>, kernel coefficient <code>gamma</code>, and tolerance setting <code>tol</code>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-29"># FIXED WITH OUTPUT
-
-param_grid = dict(C=[1e-4, 1e-3, 1e-2, 1e-1, 1, 10],
+                <pre><code class="language-python" id="code-29">param_grid = dict(C=[1e-4, 1e-3, 1e-2, 1e-1, 1, 10],
                   gamma=[100, 1000, 10000, 100000],
                   tol=[1e-4, 1e-3, 1e-2, 1e-1])
 
@@ -439,9 +419,7 @@ print(&quot;NORMED:   Best parameters {}    Score {:.2f}&quot;.format(grid.best_
         <p>In this case, while both optimised scores are better than the original one, there is also a notable improvement when using the normalised data. Let us similarly check the Random Forest classifier, first with default settings.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-30"># FIXED WITH OUTPUT
-
-clf = RandomForestClassifier(random_state=RANDOM_STATE)
+                <pre><code class="language-python" id="code-30">clf = RandomForestClassifier(random_state=RANDOM_STATE)
 
 clf.fit(X_train, y_train)
 
@@ -455,9 +433,7 @@ print(&#x27;{:&lt;30} Score: {:.2f}&#x27;.format(&#x27;Random Forest&#x27;, scor
         <p><br>And now a grid over <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">some of its parameters</a>.<br><br></p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-31"># FIXED WITH OUTPUT
-
-param_grid = dict(
+                <pre><code class="language-python" id="code-31">param_grid = dict(
     n_estimators=[5, 10, 15, 20, 50, 60, 70],
     max_features=[None, &#x27;sqrt&#x27;, &#x27;log2&#x27;],
     min_samples_split=[2, 3, 4, 5],

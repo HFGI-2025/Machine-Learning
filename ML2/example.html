@@ -153,9 +153,7 @@
                         <p>Firstly, let&#x27;s import the packages we&#x27;ll need for this example.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-1"># FIXED WITH OUTPUT
-
-from matplotlib.pyplot import axes, scatter, show, subplots, xticks
+                <pre><code class="language-python" id="code-1">from matplotlib.pyplot import axes, scatter, show, subplots, xticks
 from mpl_toolkits import mplot3d
 
 from numpy import arange, array, c_, linspace, mean, mgrid
@@ -182,9 +180,7 @@ from sklearn.tree import DecisionTreeClassifier</code></pre>
                         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-2"># FIXED WITH OUTPUT
-
-RANDOM_STATE = 111
+                <pre><code class="language-python" id="code-2">RANDOM_STATE = 111
 
 classifiers = {
     &#x27;Random Forest&#x27;: RandomForestClassifier(random_state=RANDOM_STATE),
@@ -211,9 +207,7 @@ classifiers = {
                         <p>For our classification problem, we will use the <code>make_circles</code> function. See the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">documentation</a><br><br>The parameters for noise level and relative size of the two circles are such that the task becomes difficult.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-3"># FIXED WITH OUTPUT
-
-seed(RANDOM_STATE)
+                <pre><code class="language-python" id="code-3">seed(RANDOM_STATE)
 
 X, y = make_circles(n_samples=500, factor=0.5, noise=.3, random_state=RANDOM_STATE)
 
@@ -239,9 +233,7 @@ show()</code></pre>
         <p>For training, we use the same classifiers as in the previous Lesson. We train on the whole dataset and then use a meshgrid of the state-space for prediction.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-4"># FIXED WITH OUTPUT
-
-ft_min, ft_max = -1.5, 1.5
+                <pre><code class="language-python" id="code-4">ft_min, ft_max = -1.5, 1.5
 
 # Constructing (2 grids x 300 rows x 300 cols):
 grid_1, grid_2 = mgrid[ft_min:ft_max:.01, ft_min:ft_max:.01]
@@ -257,9 +249,7 @@ new_obs = c_[grid_1.ravel(), grid_2.ravel()]</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-5"># FIXED WITH OUTPUT
-
-contour_levels = linspace(0, 1, 6)
+                <pre><code class="language-python" id="code-5">contour_levels = linspace(0, 1, 6)
 
 fig, all_axes = subplots(figsize=[15, 5], ncols=4, nrows=2, sharey=True, sharex=True)
 

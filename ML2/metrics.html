@@ -121,9 +121,7 @@
                     <p>We already used the score to evaluate the model performance. Here are some further metrics used in machine learning.<br><br><strong>Accuracy</strong> is a metric that evaluates the integrity of the model by comparing true labels with their predicted counterparts. It produces a value between 0 and 1, where 1 is the best possible outcome, and $1 / n_{classes}$ represents the probability of a random guess. See <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html">the Scikit-learn documentation for the accuracy_score.</a> The mathematical formula can be found in the <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score">metrics and scoring section of the documentation</a>.<br><br><strong>Recall</strong> is a metric that evaluates the ability of a classification model to find true positive labels. The measure produces a scalar value between 0 and 1, where 1 is the perfect outcome. See <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html">the scikit-learn documentation for the recall_score</a>. The recall is the percentage of true predictions of the overall number of predictions. It is also known as <em>sensitivity</em>.<br><br><strong>Average Precision</strong>, also referred to as AP, is a metric that produces a scalar value for the precision-recall curve between and with being the outcome. The metric obtains this value by weighing:<br><ul class="nested-list"><li>the mean of precisions (P) at each threshold (n),</li><br><li>the increase in recall (R) from the previous threshold (n-1).</li></ul>The metric is mathematically defined as follows:<br><br>$$ AP = \sum_{n}^{}(R_n - R_{n-1}) \cdot P $$</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-6"># FIXED
-
-from numpy.random import seed, uniform
+                <pre><code class="language-python" id="code-6">from numpy.random import seed, uniform
 from numpy import arange, array, c_, linspace, mean, mgrid
 from matplotlib.pyplot import subplots, axes, scatter, xticks, show
 
@@ -179,9 +177,7 @@ ft_min, ft_max = X.min(), X.max()</code></pre>
                         <p>As you may have noticed, the AUC metric also evaluates the area under the precision-recall curve using the trapezoid rule and with linear interpolation. The interpolation, however, may cause the resulting output to be better than it actually is. In other words, the AUC measure evaluates the outcome rather optimistically.<br><br>Precision is also called the <em>positive predictive value</em>.<br><br><strong>F1 Score</strong>: Another useful metric to evaluate a classification model that relies on precision and recall is the F1 Score, see the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">scikit-learn documentation</a>.<br><br>It is mathematically defined as:<br><br>$$ F_1 = 2 \cdot \frac{P\cdot R}{P+R} $$<br><br>where $P$ and $R$ represent precision and recall, respectively. Wikipedia has a <a href="https://en.wikipedia.org/wiki/Precision_and_recall">nice summary of the measures and connections between them</a>. In scikit-learn, these measures can be used in a standardised fashion. Here is an example using the <code>recall_score</code>.<br><br>Let&#x27;s start by again performing our <code>train_test_split</code> and defining our two-dimensional state-space grid:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-9"># FIXED WITH OUTPUT
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.5, random_state=RANDOM_STATE, shuffle=True)
+                <pre><code class="language-python" id="code-9">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.5, random_state=RANDOM_STATE, shuffle=True)
 
 ft_min, ft_max = -1.5, 1.5
 
@@ -201,9 +197,7 @@ contour_levels = linspace(0, 1, 6)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-10"># FIXED WITH OUTPUT
-
-fig, all_axes = subplots(figsize=[15, 5], ncols=4, nrows=2, sharey=True, sharex=True)
+                <pre><code class="language-python" id="code-10">fig, all_axes = subplots(figsize=[15, 5], ncols=4, nrows=2, sharey=True, sharex=True)
 
 for ax, (name, clf) in zip(all_axes.ravel(), classifiers.items()):
 
