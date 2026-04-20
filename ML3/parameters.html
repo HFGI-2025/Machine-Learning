@@ -145,10 +145,12 @@
                     <h3>Introduction</h3>
                     <p>This section of the lesson will look into the problem of <strong>model selection</strong> in Gaussian Mixture Models, with particular attention to how key <em>parameters</em> influence the quality and interpretability of a fitted model. By examining how <em>likelihood-based scores</em> change as model complexity increases, it highlights the <em>trade-off between under-fitting and over-fitting</em> in an unsupervised setting. <em>Visualisation</em> and quantitative comparison are used together to influence the best choices to be made about the <em>number of mixture components</em>, reinforcing the idea that model selection is an essential part of applying probabilistic models to real data rather than a purely technical afterthought.</p><p>Now that we have fitted the estimator, we can obtain the optimal parameters for the fitted components. They are stored in the model attributes. We can extract (i) the <code>.weights_</code>, the share of each of the components (Gaussians) in the mixture; (ii) the <code>.means_</code>, the coordinates of the mean values; and (iii) <code>.covariances_</code>, the covariance matrix of each component.</p>
         <div class="code-area">
-            <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-9"># FIXED WITH OUTPUT COLLAPSABLE
-
-# Let&#x27;s re-run code from the previous lesson section, to reinitialise and obtain our training data.
+            <div class="code-collapse-header" onclick="toggleCodeCollapse('code-9')">
+                <span class="code-collapse-icon">▶</span>
+                <span class="code-collapse-label">Show code</span>
+            </div>
+            <div class="code-container code-fixed code-collapsed" id="code-9-container">
+                <pre><code class="language-python" id="code-9"># Let&#x27;s re-run code from the previous lesson section, to reinitialise and obtain our training data.
 
 from numpy import array, dot, vstack
 from numpy.random import randn, seed, multivariate_normal
@@ -179,9 +181,7 @@ X_train = vstack([gaussian_1, gaussian_2])</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-10"># FIXED WITH OUTPUT
-
-components = 2
+                <pre><code class="language-python" id="code-10">components = 2
 
 clf = GaussianMixture(n_components=components);
 
@@ -215,9 +215,7 @@ Covariance Matrices:
         <p>The <code>.fit()</code> method returns a model where the two components have equal weight. The means and covariance matrices can be compared directly to the values chosen to create the data. They are not identical but good estimates are obtained from a fit to 500 data points in each group.</p><h4>Create data from optimal model</h4><p>The result of the fitting are the parameters for two Gaussian distributions with two features each. These parameters can be used to create further model data with the same characteristics. In our demonstration we know the original sources but if the parameters are obtained from experimental or clinical data, it is useful to visualise the predicted distributions using as many samples as necessary.<br><br>If we know the mean and the covariance matrix of a Gaussian, the function <code>multivariate_normal</code> can be used to create data from that Gaussian.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-11"># FIXED WITH OUTPUT
-
-model1_mean, model2_mean = clf.means_[0], clf.means_[1]
+                <pre><code class="language-python" id="code-11">model1_mean, model2_mean = clf.means_[0], clf.means_[1]
 model1_cov, model2_cov =  clf.covariances_[0], clf.covariances_[1]
 
 samples = 100
@@ -245,9 +243,7 @@ show()</code></pre>
                         <p>Now we can apply what we have discussed in supervised machine learning and use the trained model to predict.<br><br>We can get the predictions of the group for new data. Here, for simplicity, we create test data from the same distribution as the train data. The label is obtained from the method <code>.predict</code>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-12"># FIXED WITH OUTPUT
-
-n_samples = 10
+                <pre><code class="language-python" id="code-12">n_samples = 10
 m_features = 2
 
 # Seed the random number generator
@@ -284,9 +280,7 @@ print(y_test)</code></pre>
         <p>For simplicity, fit and predict can be combined with the <code>.fit_predict</code> method to directly get the labels for each sample. Here is an example where we fit the model to the test data and directly extract their predicted labels.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-13"># FIXED WITH OUTPUT
-
-components = 2
+                <pre><code class="language-python" id="code-13">components = 2
 
 clf_2 = GaussianMixture(n_components=components, covariance_type=&#x27;full&#x27;)
 
@@ -300,9 +294,7 @@ print(labels)
         <p>The probabilities of the predictions are obtained from the method <code>.predict_proba</code>. Note that probabilities may be <em>near</em> 0 or 1 for well-separated data, but are often fractional. The model is sure about their group signature.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-14"># FIXED WITH OUTPUT
-
-y_proba = clf.predict_proba(X_test)
+                <pre><code class="language-python" id="code-14">y_proba = clf.predict_proba(X_test)
 
 fig, ax = subplots()
 
@@ -315,9 +307,7 @@ show()</code></pre>
         <p>The <code>.sample</code> method produces individual samples from the trained model. It takes the number of required samples as an input argument and yields the sample values as well as the group for each sample. Samples for each group are given with probability according to the group weights.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-15"># FIXED WITH OUTPUT
-
-samples = clf.sample(5)
+                <pre><code class="language-python" id="code-15">samples = clf.sample(5)
 
 print(samples[0])
 print(&#x27;&#x27;)
@@ -335,9 +325,7 @@ print(samples[1])</code></pre>
         <p>We can now redo the example with two distributions that lie closer together, i.e. making the clustering task harder.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-16"># FIXED WITH OUTPUT
-
-n_samples = 500
+                <pre><code class="language-python" id="code-16">n_samples = 500
 m_features = 2
 
 # Seed the random number generator
@@ -376,9 +364,7 @@ show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-17"># FIXED WITH OUTPUT
-
-from numpy import linspace, meshgrid, c_, logspace, logspace
+                <pre><code class="language-python" id="code-17">from numpy import linspace, meshgrid, c_, logspace, logspace
 from matplotlib.pyplot import subplots, title, axis, show
 from matplotlib.colors import LogNorm
 from sklearn.mixture import GaussianMixture
@@ -424,9 +410,7 @@ show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-18"># FIXED WITH OUTPUT
-
-print(&#x27;Model Weights: &#x27;)
+                <pre><code class="language-python" id="code-18">print(&#x27;Model Weights: &#x27;)
 print(clf2.weights_)
 print(&#x27;&#x27;)
 
@@ -500,9 +484,7 @@ Predicted Labels
                         <p>Knowing the origin of the data we can now compare the predicted labels with the true labels (the ground truth) and obtain a scoring. A function provided by scikit-learn is the (adjusted or unadjusted) <strong>Rand index</strong>. It measures the <em>similarity</em> of the <em>predicted</em> and the <em>true</em> assignments. However, random assignment of labels will (by chance) lead to a number of correct predictions. To adjust for this fact and ensure that randomly assigned labels get a scoring close to zero, the function to use is <code>adjusted_rand_score</code>:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-19"># FIXED WITH OUTPUT
-
-from sklearn.metrics.cluster import adjusted_rand_score
+                <pre><code class="language-python" id="code-19">from sklearn.metrics.cluster import adjusted_rand_score
 from numpy import zeros
 
 y_true = zeros(2*n_samples)

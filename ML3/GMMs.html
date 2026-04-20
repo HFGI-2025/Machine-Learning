@@ -142,9 +142,7 @@
                     <p><strong>Gaussian Mixture Models (GMMs)</strong> are a class of <strong>probabilistic</strong> models that describe complex data as a combination of multiple underlying Gaussian distributions. This makes them particularly well-suited to unsupervised learning problems where structure must be inferred, rather than labelled. Their strength lies in their ability to capture heterogeneity, overlap and uncertainty in data, while remaining mathematically interpretable and visually intuitive.<br><br>In this lesson, GMMs are explored progressively. We move from controlled synthetic examples that reveal their core behaviour, through to model selection and likelihood-based interpretation, and finally to applied scenarios such as <strong>image segmentation</strong>. This progression is designed to show how a single, probabilistic framework can scale naturally from abstract distributions to meaningful, real-world analyses, highlighting both the flexibility and practical relevance of GMMs.</p><h4>Imports</h4>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-1"># FIXED WITH OUTPUT
-
-from numpy import arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile
+                <pre><code class="language-python" id="code-1">from numpy import arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile
 from numpy import histogram, cumsum, around
 from numpy import vstack, sqrt, logspace, amin, amax, equal, invert, count_nonzero
 from numpy.random import uniform, seed, randint, randn, multivariate_normal
@@ -181,9 +179,7 @@ from matplotlib.colors import LogNorm</code></pre>
         <p>Import the patients data, scatter the data for <code>Weight</code> and <code>Height</code> and obtain summary statistics for both.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-2"># FIXED WITH OUTPUT
-
-df = read_csv(&quot;data/patients_data.csv&quot;)
+                <pre><code class="language-python" id="code-2">df = read_csv(&quot;data/patients_data.csv&quot;)
 
 # Weight to kg and height to cm
 pound_kg_conversion = 0.45
@@ -209,9 +205,7 @@ show()</code></pre>
         <p>Looking at the data, one might expect that there are two distinct groups, visually identified as two clouds separated e.g. by a vertical line at Weight $\approx$ 70 (kg). A consequence is that the mean value of 69.3 kg (which was calculated over all samples) should better be replaced by two mean values, one for each of the clouds. Visually, these can be estimated at around 60 and 80 kg.<br><br>We can make this even clearer by looking at the two individual distributions.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-3"># FIXED WITH OUTPUT
-
-fig, ax = subplots(ncols=2)
+                <pre><code class="language-python" id="code-3">fig, ax = subplots(ncols=2)
 
 ax[0].hist(df[&#x27;Weight&#x27;], bins=20);
 ax[0].set_xlabel(&#x27;Weight&#x27;, fontsize=16)
@@ -235,9 +229,7 @@ show()</code></pre>
                         <p>A <strong>Gaussian Mixture Models (GMM)</strong> approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one centre in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. Another way of grouping is to find a curve that splits the plane into two areas.<br><br>The GMM assumes normally distributed data structure from at least two sources. Other than that it does not make assumptions about the data.<br><br>GMM is a parametric learning approach as it optimises the parameters of normal distributions, i.e. the mean and the covariance matrix of each group. It is therefore an example of a model fitting method.<br><br>As its name suggests, it assumes that the distribution of each group is normal. If the groups are known to have a non-normal distribution, it may not be the optimal approach.<br><br>GMM is one example of clustering or <a href="https://en.wikipedia.org/wiki/Cluster_analysis">cluster analysis</a>. Whenever we suspect that a dataset contains contributions of qualitatively different types, we can consider doing a cluster analysis to separate those types. However, this is a vague notion and clustering is therefore a complex field. We can only provide an introduction to its basic components. The main point to keep in mind is that the algorithms provided e.g. by scikit-learn will always give some result but that it is not easy to assess the quality of the results. scikit-learn has a good <a href="https://scikit-learn.org/stable/modules/clustering.html#clustering">overview of clustering methods</a> showing advantages and disadvantages of each. Here is a link to a readable introduction about the cautious application and the <a href="https://stke.sciencemag.org/content/9/432/re6.full">pitfalls of clustering</a>.<br></p><h4>Creating test data</h4><p>Let us create synthetic data for testing of the clustering algorithm. We do this according to the assumptions of GMM: we will create two Gaussian datasets with different means and different standard deviations and add them together. For illustration we only use two features.<br><br>The example is adapted from a <a href="https://scikit-learn.org/stable/modules/mixture.html#mixture">scikit-learn example</a>. It uses the concept of <a href="https://datascienceplus.com/understanding-the-covariance-matrix/">covariance matrix</a> which is the extension of variance (or standard deviation) to multivariate datasets.<br></p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-4"># FIXED WITH OUTPUT
-
-n_samples = 500
+                <pre><code class="language-python" id="code-4">n_samples = 500
 m_features = 2
 
 # Seed the random number generator
@@ -275,9 +267,7 @@ show()
         <p>The scatter plot shows that this method allows the adjustment of the centres of the distributions as well as the elliptical shape of the distribution.<br><br>Now we fit a GMM. Note that the GMM needs to be told how many components one wants to fit. Modifications that estimate the optimal number of components exist but we will restrict the demonstration to the method that directly sets the number.<br><br>Analogous to the classifier in supervised learning, we instantiate the model from the imported class <code>GaussianMixture</code>. The instantiation takes the number of independent datasets (clusters) as an argument. By default, the estimator tries to fit the full covariance matrix of each group. The fitting is done using the method <code>fit</code>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-5"># FIXED WITH OUTPUT
-
-from sklearn.mixture import GaussianMixture
+                <pre><code class="language-python" id="code-5">from sklearn.mixture import GaussianMixture
 
 # Fit a Gaussian Mixture Model with two components
 
@@ -1191,9 +1181,7 @@ forceTheme('sk-container-id-1');</script></body></div>
         <p>After the fitting of the model, we first create a meshgrid of the (two-dimensional) state space. For each point in this state space, we obtain the predicted scores using the method <code>.score_samples</code>. These are the weighted logarithmic probabilities which show the predicted distribution of points in the state space.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-6"># FIXED WITH OUTPUT
-
-resolution = 100
+                <pre><code class="language-python" id="code-6">resolution = 100
 
 vec_a = linspace(-60., 80., resolution)
 vec_b = linspace(-40., 50., resolution)
@@ -1214,9 +1202,7 @@ print(Z_s.shape)</code></pre>
         <p>Now we can display the predicted scores as a contour plot. Typically, the negative log-likelihood or <a href="https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_pdf.html?highlight=lognorm">density estimation</a> is used for this. In this case, the highest probabilities are shown as a landscape with two minima.<br></p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-7"># FIXED WITH OUTPUT
-
-fig, ax = subplots(figsize=(8, 6))
+                <pre><code class="language-python" id="code-7">fig, ax = subplots(figsize=(8, 6))
 
 cax = ax.contour(grid_a, grid_b, -Z_s,
            norm=LogNorm(vmin=1.0, vmax=1000.0),
@@ -1238,9 +1224,7 @@ show()</code></pre>
         <p>You can change the number of components to see the impact it has on the result. E.g. picking 3 components:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-8"># FIXED WITH OUTPUT
-
-clf_3 = GaussianMixture(n_components=3)
+                <pre><code class="language-python" id="code-8">clf_3 = GaussianMixture(n_components=3)
 
 clf_3.fit(X_train)
 

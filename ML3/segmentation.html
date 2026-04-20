@@ -157,10 +157,12 @@
                         <h3>Fitting and visualisation:</h3>
                         <p>After this data cleaning step, we can proceed with our analysis. We want to segment the images into brain tissue and tumour tissue. It is not obvious how to do this, as the intensity values in the above histogram are continuous with only one major peak in intensity. We will nonetheless attempt to cluster the images using a Gaussian Mixture Model (GMM).<br><br>Firtly, let&#x27;s instantiate our variables carried across from the previous section, and set out our import statements:</p>
         <div class="code-area">
-            <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-35"># FIXED WITH NO OUTPUT COLLAPSABLE
-
-from numpy import array, unique, where
+            <div class="code-collapse-header" onclick="toggleCodeCollapse('code-35')">
+                <span class="code-collapse-icon">▶</span>
+                <span class="code-collapse-label">Show code</span>
+            </div>
+            <div class="code-container code-fixed code-collapsed" id="code-35-container">
+                <pre><code class="language-python" id="code-35">from numpy import array, unique, where
 
 from matplotlib.pyplot import subplots, show, tight_layout
 
@@ -195,9 +197,7 @@ img4_nz = img4[mask]</code></pre>
         <p>We then fit the instantiated model with a few different numbers of clusters (argument <code>n_components</code>, between n = 2 to 4) individually for each image. We use the <code>fit_predict</code> method to simultaneously fit and label the images. Note that we also add 1 to each image label. This is because each data point gets labelled with a number from 0 to <em>n-1</em> where <em>n</em> is the number of clusters used to fit the model. At the plotting stage, we do not want any of our labels to be equal to 0, as this corresponds to the background.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-36"># FIXED WITH OUTPUT
-
-RANDOM_SEED = 123
+                <pre><code class="language-python" id="code-36">RANDOM_SEED = 123
 
 gmm_2 = gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img1_n2_labels = gmm_2.fit_predict(img1_nz.reshape(-1, 1))
@@ -216,9 +216,7 @@ img1_n4_labels += 1</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-37"># FIXED WITH OUTPUT
-
-gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
+                <pre><code class="language-python" id="code-37">gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img2_n2_labels = gmm_2.fit_predict(img2_nz.reshape(-1, 1))
 img2_n2_labels += 1
 
@@ -235,8 +233,7 @@ img2_n4_labels += 1</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-38"># FIXED WITH OUTPUT
-gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
+                <pre><code class="language-python" id="code-38">gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img3_n2_labels = gmm_2.fit_predict(img3_nz.reshape(-1, 1))
 img3_n2_labels += 1
 
@@ -253,9 +250,7 @@ img3_n4_labels += 1</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-39"># FIXED WITH OUTPUT
-
-gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
+                <pre><code class="language-python" id="code-39">gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img4_n2_labels = gmm_2.fit_predict(img4_nz.reshape(-1, 1))
 img4_n2_labels += 1
 
@@ -272,9 +267,7 @@ img4_n4_labels += 1</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-40"># FIXED WITH OUTPUT
-
-from numpy import zeros
+                <pre><code class="language-python" id="code-40">from numpy import zeros
 
 img1_n2_labels_mapped = zeros(img1.shape)
 img1_n2_labels_mapped[mask] = img1_n2_labels
@@ -290,9 +283,7 @@ img1_n4_labels_mapped[mask] = img1_n4_labels</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-41"># FIXED WITH OUTPUT
-
-img2_n2_labels_mapped = zeros(img2.shape)
+                <pre><code class="language-python" id="code-41">img2_n2_labels_mapped = zeros(img2.shape)
 img2_n2_labels_mapped[mask] = img2_n2_labels
 
 img2_n3_labels_mapped = zeros(img2.shape)
@@ -306,9 +297,7 @@ img2_n4_labels_mapped[mask] = img2_n4_labels</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-42"># FIXED WITH OUTPUT
-
-img3_n2_labels_mapped = zeros(img3.shape)
+                <pre><code class="language-python" id="code-42">img3_n2_labels_mapped = zeros(img3.shape)
 img3_n2_labels_mapped[mask] = img3_n2_labels
 
 img3_n3_labels_mapped = zeros(img3.shape)
@@ -322,8 +311,7 @@ img3_n4_labels_mapped[mask] = img3_n4_labels</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-43"># FIXED WITH OUTPUT
-img4_n2_labels_mapped = zeros(img4.shape)
+                <pre><code class="language-python" id="code-43">img4_n2_labels_mapped = zeros(img4.shape)
 img4_n2_labels_mapped[mask] = img4_n2_labels
 
 img4_n3_labels_mapped = zeros(img4.shape)
@@ -337,9 +325,7 @@ img4_n4_labels_mapped[mask] = img4_n4_labels</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-44"># FIXED WITH OUTPUT
-
-fig, ax = subplots(3, 4, figsize=(20, 15))
+                <pre><code class="language-python" id="code-44">fig, ax = subplots(3, 4, figsize=(20, 15))
 
 ax[0, 0].imshow(img1_n2_labels_mapped[:, :, img_slice], cmap=&#x27;viridis&#x27;)
 ax[1, 0].imshow(img1_n3_labels_mapped[:, :, img_slice], cmap=&#x27;viridis&#x27;)
@@ -394,9 +380,7 @@ show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-45"># FIXED WITH OUTPUT
-
-from numpy import stack
+                <pre><code class="language-python" id="code-45">from numpy import stack
 
 all_img = stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
 all_img.shape</code></pre>
@@ -406,9 +390,7 @@ all_img.shape</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-46"># FIXED WITH OUTPUT
-
-gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
+                <pre><code class="language-python" id="code-46">gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 
 all_img_n3_labels = gmm_3.fit_predict(all_img)
 all_img_n3_labels += 1</code></pre>
@@ -418,9 +400,7 @@ all_img_n3_labels += 1</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-47"># FIXED WITH OUTPUT
-
-all_img_n3_labels_mapped = zeros(img1.shape)
+                <pre><code class="language-python" id="code-47">all_img_n3_labels_mapped = zeros(img1.shape)
 all_img_n3_labels_mapped[mask] = all_img_n3_labels</code></pre>
             </div>
             
@@ -428,9 +408,7 @@ all_img_n3_labels_mapped[mask] = all_img_n3_labels</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-48"># FIXED WITH OUTPUT
-
-fig, ax = subplots(1, 5, figsize=(20, 5))
+                <pre><code class="language-python" id="code-48">fig, ax = subplots(1, 5, figsize=(20, 5))
 ax[0].imshow(img1_n3_labels_mapped[:, :, img_slice], cmap=&#x27;viridis&#x27;)
 ax[1].imshow(img2_n3_labels_mapped[:, :, img_slice], cmap=&#x27;viridis&#x27;)
 ax[2].imshow(img3_n3_labels_mapped[:, :, img_slice], cmap=&#x27;viridis&#x27;)
@@ -454,9 +432,7 @@ show()</code></pre>
         <p>Here, the last column shows the cluster results when all four images are used in the Gaussian Mixture Model. These results seem to be better than the individual images, and with three clusters, the lesion, CSF and brain tissue seem clearly identified.<br><br>Let&#x27;s plot some of the other image slices to check that the segmentation performs well on the whole 3-D image.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-49"># FIXED WITH OUTPUT
-
-fig, ax = subplots(5, 5, figsize=(20, 20))
+                <pre><code class="language-python" id="code-49">fig, ax = subplots(5, 5, figsize=(20, 20))
 
 ax[0, 0].imshow(img1[:, :, 16], cmap=&#x27;gray&#x27;)
 ax[0, 1].imshow(img1[:, :, 18], cmap=&#x27;gray&#x27;)
@@ -514,21 +490,17 @@ show()</code></pre>
                 <p>Note that this plot might take a bit longer to run, as there is a very large number of data points.</p>
             </div>
         </div>
-        <p>In a python plotting library called <a href="https://seaborn.pydata.org">seaborn</a>, such plots are called <code>pairplots</code> and can be very easily plotted if your data is in a Pandas Data Frame.<br><br>You can install it at the command prompt (Windows) or terminal (MacOS, Linux) using:<br><br><pre class="markdown-code-block"><code>conda install seaborn</code></pre></p><p>To use it, import the required functions in your Python kernel, e.g.:</p>
+        <p>In a python plotting library called <a href="https://seaborn.pydata.org">seaborn</a>, such plots are called <code>pairplots</code> and can be very easily plotted if your data is in a Pandas Data Frame.<br><br>To use it, import the required functions in your Python kernel, e.g.:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-50"># FIXED WITH OUTPUT
-
-from seaborn import pairplot</code></pre>
+                <pre><code class="language-python" id="code-50">from seaborn import pairplot</code></pre>
             </div>
             
         </div>
         <p>We don&#x27;t use this library here, but encourage you to look up further information in <a href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">the seaborn documentation</a>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-51"># FIXED WITH OUTPUT
-
-fig, ax = subplots(4, 4, figsize=(20, 20))
+                <pre><code class="language-python" id="code-51">fig, ax = subplots(4, 4, figsize=(20, 20))
 
 ax[0, 0].hist(img1_nz, bins=50);
 ax[0, 0].set_title(&#x27;Image 1&#x27;, fontsize=16)
@@ -596,9 +568,7 @@ show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-52"># FIXED WITH OUTPUT
-
-import matplotlib.colors as mcolors
+                <pre><code class="language-python" id="code-52">import matplotlib.colors as mcolors
 
 fig, ax = subplots(4, 4, figsize=(20, 20))
 

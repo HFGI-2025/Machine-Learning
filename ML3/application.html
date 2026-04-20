@@ -122,9 +122,7 @@
                     <p>This part of the lesson seeks to demonstrate how Gaussian Mixture Models can be applied beyond controlled synthetic examples to more realistic data scenarios. By working with fitted models and visualising their behaviour across a continuous state space, it illustrates how probabilistic predictions and likelihood surfaces can be interpreted, spatially. The focus is on connecting the mathematical outputs of a GMM to intuitive, visual insights about structure, uncertainty, and model behaviour in practice.</p><h4>Application to example data</h4><p>Let us now apply the GMM approach to the example at the beginning of the lesson.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-20"># FIXED WITH NO OUTPUT COLLAPSABLE
-
-# Let&#x27;s reinstantiate our seed and set out our import statements.
+                <pre><code class="language-python" id="code-20"># Let&#x27;s reinstantiate our seed and set out our import statements.
 
 from numpy import array, c_, linspace, logspace, meshgrid, min, max
 from numpy.random import seed, multivariate_normal
@@ -145,9 +143,7 @@ seed(RANDOM_NUMBER)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-21"># FIXED WITH OUTPUT
-
-from pandas import read_csv
+                <pre><code class="language-python" id="code-21">from pandas import read_csv
 
 df = read_csv(&quot;data/patients_data.csv&quot;)
 
@@ -165,8 +161,7 @@ print(X_train.shape)</code></pre>
         <p>Now we can fit the GMM estimator using the suspected number of two components.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-22"># FIXED WITH OUTPUT
-clf = GaussianMixture(n_components=2)
+                <pre><code class="language-python" id="code-22">clf = GaussianMixture(n_components=2)
 
 clf.fit(X_train)
 
@@ -206,9 +201,7 @@ show()</code></pre>
         <p>These predictions can now be compared with labels in the data, for example the Gender. To check the outcome of the fitted model versus the gender, we obtain the predicted labels from the model. We can compare this with the gender labels in the data:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-23"># FIXED WITH OUTPUT
-
-y_predict = clf.predict(X_train)
+                <pre><code class="language-python" id="code-23">y_predict = clf.predict(X_train)
 
 gender_boolean = df[&#x27;Gender&#x27;] == &#x27;Female&#x27;
 
@@ -224,9 +217,7 @@ print(scoring)</code></pre>
         <p>In this case, the predictions from the GMM match closely with the gender label in the data. The outcome is therefore strong in this dataset.<br><br>We can also compare the predictions with the smoker labels:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-24"># FIXED WITH OUTPUT
-
-y_smoker = df[&#x27;Smoker&#x27;]
+                <pre><code class="language-python" id="code-24">y_smoker = df[&#x27;Smoker&#x27;]
 
 scoring = adjusted_rand_score(y_smoker, y_predict)
 
@@ -238,9 +229,7 @@ print(scoring)</code></pre>
         <p>This result shows that the GMM labelling is arbitrary when compared with the smoker labels in the data.<br><br>From the trained model we create the individual predicted distributions for each group.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-25"># FIXED WITH OUTPUT
-
-group1_mean = clf.means_[0]
+                <pre><code class="language-python" id="code-25">group1_mean = clf.means_[0]
 group1_cov  = clf.covariances_[0]
 
 group2_mean = clf.means_[1]
