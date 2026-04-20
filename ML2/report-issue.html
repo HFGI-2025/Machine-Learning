@@ -218,8 +218,7 @@
             const submitButton = document.getElementById('submitButton');
             const formMessage = document.getElementById('formMessage');
             
-            // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL 
-            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSdqC2-VryyYK1FwNYXl2OpFLXXcX75pYEQDXtaFLxNdq6jzuIUai21sjuBvkHcPelHw/exec';
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBbI6tb6kavmCNT0LLW7Y_Qe4ucIehRVBSvrPhby2Xix2D_zKTmI8kQCVn7NidtSk_/exec';
             
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -303,7 +302,7 @@
                     
                 } catch (error) {
                     console.error('All methods failed:', error);
-                    showMessage('There was an error submitting your issue. Please try again or email us directly at laurence.blackhurst@scryptiq.ai', 'error');
+                    showMessage('There was an error submitting your issue. Please try again or email us directly at hello@scryptiq.ai', 'error');
                 } finally {
                     submitButton.disabled = false;
                     submitButton.innerHTML = `
