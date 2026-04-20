@@ -129,10 +129,12 @@ import plotly.graph_objects as go</textarea>
         </div>
         
         <div class="code-area">
-            <div class="code-container code-editor">
-                <textarea id="code-cell-2"># FIXED WITH OUTPUT COLLAPSABLE
-
-paths, attributes = svg2paths(&#x27;./data/scryptIQ-logo.svg&#x27;)
+            <div class="code-collapse-header" onclick="toggleCodeCollapse('code-cell-2')">
+                <span class="code-collapse-icon">▶</span>
+                <span class="code-collapse-label">Show code</span>
+            </div>
+            <div class="code-container code-fixed code-collapsed" id="code-cell-2-container">
+                <textarea id="code-cell-2">paths, attributes = svg2paths(&#x27;./data/scryptIQ-logo.svg&#x27;)
 
 main_coords_list_x = []
 main_coords_list_y = []
@@ -243,7 +245,6 @@ fig.update_layout(
 # Convert to html code
 fig.to_html(include_plotlyjs=&#x27;cdn&#x27;)</textarea>
             </div>
-            <button id="run-code-cell-2" class="run-button">Run Code</button>
             <div id="code-cell-2-output" class="output"></div>
         </div>
         
